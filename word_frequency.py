@@ -22,8 +22,9 @@ def print_word_freq(file):
                     wordList[word] = 1
 
         result = reversed((sorted(wordList, key=wordList.get)))
+        width = max([len(el) for el in wordList])
         for el in result:
-            print(f"{el}: {'*' * wordList[el]}")
+            print(f"{el:>{width}}  |  {wordList[el]} {'*' * wordList[el]}")
 
 
 if __name__ == "__main__":
