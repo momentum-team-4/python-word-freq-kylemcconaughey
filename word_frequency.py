@@ -1,7 +1,7 @@
 STOP_WORDS = [
     'a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'for', 'from', 'has', 'he',
     'i', 'in', 'is', 'it', 'its', 'of', 'on', 'that', 'the', 'to', 'were',
-    'will', 'with'
+    'will', 'with', '"', '-', ':', ',', ' ', ''
 ]
 file = 'one-today.txt'
 
@@ -12,21 +12,25 @@ def print_word_freq(file):
 
     with open(file, "rt") as infile:
         for line in infile:
-
             for word in line.split():
-                for char in word:
-                    char = char.replace('-', ' ')
-                    char = char.replace(':', ' ')
-                    char = char.replace(',', ' ')
-                    char = char.replace('.', ' ')
-                    char = char.replace('\n', ' ')
-                if word in wordList:
-                    if word not in STOP_WORDS:
+
+                word = word.lower()
+                word = word.replace('—', ' ')
+                word = word.replace(':', ' ')
+                word = word.replace(',', ' ')
+                word = word.replace('.', ' ')
+                word = word.replace('/n', ' ')
+                word = word.replace('"', ' ')
+                word = word.strip()
+
+                if word not in STOP_WORDS:
+                    if word in wordList:
                         wordList[word] += 1
-                else:
-                    wordList[word] = 1
-        print(wordList)
-        return wordList
+                    else:
+                        wordList[word] = 1
+
+        for el in wordList:
+            print(f"{el}: {'*' * wordList[el]}")
 
 
 if __name__ == "__main__":
