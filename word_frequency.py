@@ -1,9 +1,8 @@
 STOP_WORDS = [
     'a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'for', 'from', 'has', 'he',
     'i', 'in', 'is', 'it', 'its', 'of', 'on', 'that', 'the', 'to', 'were',
-    'will', 'with', '"', '-', ':', ',', ' ', ''
+    'will', 'with'
 ]
-file = 'one-today.txt'
 
 
 def print_word_freq(file):
@@ -22,7 +21,7 @@ def print_word_freq(file):
                 else:
                     wordList[word] = 1
 
-        result = (sorted(wordList, key=wordList.get))
+        result = reversed((sorted(wordList, key=wordList.get)))
         for el in result:
             print(f"{el}: {'*' * wordList[el]}")
 
