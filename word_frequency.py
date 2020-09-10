@@ -12,12 +12,14 @@ def print_word_freq(file):
 
     with open(file, "rt") as infile:
         for line in infile:
-            line = line.replace('-', ' ')
-            line = line.replace(':', ' ')
-            line = line.replace(',', ' ')
-            line = line.replace('.', ' ')
-            line = line.replace('\n', ' ')
+
             for word in line.split():
+                for char in word:
+                    char = char.replace('-', ' ')
+                    char = char.replace(':', ' ')
+                    char = char.replace(',', ' ')
+                    char = char.replace('.', ' ')
+                    char = char.replace('\n', ' ')
                 if word in wordList:
                     if word not in STOP_WORDS:
                         wordList[word] += 1
