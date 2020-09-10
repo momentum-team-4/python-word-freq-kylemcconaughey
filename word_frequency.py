@@ -3,11 +3,28 @@ STOP_WORDS = [
     'i', 'in', 'is', 'it', 'its', 'of', 'on', 'that', 'the', 'to', 'were',
     'will', 'with'
 ]
+file = 'one-today.txt'
 
 
 def print_word_freq(file):
-    """Read in `file` and print out the frequency of words in that file."""
-    pass
+
+    wordList = {}
+
+    with open(file, "rt") as infile:
+        for line in infile:
+            line = line.replace('-', ' ')
+            line = line.replace(':', ' ')
+            line = line.replace(',', ' ')
+            line = line.replace('.', ' ')
+            line = line.replace('\n', ' ')
+            for word in line.split():
+                if word in wordList:
+                    if word not in STOP_WORDS:
+                        wordList[word] += 1
+                else:
+                    wordList[word] = 1
+        print(wordList)
+        return wordList
 
 
 if __name__ == "__main__":
