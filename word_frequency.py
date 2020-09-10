@@ -11,25 +11,19 @@ def print_word_freq(file):
     wordList = {}
 
     with open(file, "rt") as infile:
-        for line in infile:
-            for word in line.split():
+        text = infile.read()
+        allWords = text.lower().replace('—', ' ').replace(':', ' ').replace(
+            ',', ' ').replace('.', ' ').replace('/n', ' ').replace('"', ' ').split()
 
-                word = word.lower()
-                word = word.replace('—', ' ')
-                word = word.replace(':', ' ')
-                word = word.replace(',', ' ')
-                word = word.replace('.', ' ')
-                word = word.replace('/n', ' ')
-                word = word.replace('"', ' ')
-                word = word.strip()
+        for word in allWords:
+            if word not in STOP_WORDS:
+                if word in wordList:
+                    wordList[word] += 1
+                else:
+                    wordList[word] = 1
 
-                if word not in STOP_WORDS:
-                    if word in wordList:
-                        wordList[word] += 1
-                    else:
-                        wordList[word] = 1
-
-        for el in wordList:
+        result = (sorted(wordList, key=wordList.get))
+        for el in result:
             print(f"{el}: {'*' * wordList[el]}")
 
 
